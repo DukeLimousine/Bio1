@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.security.SecureRandom;
 
 /**
  * Created by HansYolo on 11/22/2016.
@@ -9,12 +10,15 @@ public class Species {
     private double meanLength;
     private double meanTailLength;
     private double meanWingSpan;
-    private enum Diet {HERBIVORE, CARNIVORE, OMNIVORE};
+    public enum Diet {HERBIVORE, CARNIVORE, OMNIVORE};
     private Diet diet;
     private int breedingCapability;
     private double meanBrainSize;
     private double meanFatPercentage;
+    private String speciesName;
     private Random random;
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
 
 
     public Species(){
@@ -22,6 +26,8 @@ public class Species {
         setSpeciesAttributes();
 
     }
+
+
 
     public void setSpeciesAttributes(){
         //Set mean weight. This will be between 0 and 1000
@@ -34,11 +40,18 @@ public class Species {
         if(random.nextBoolean()){
             meanTailLength = meanLength * ((random.nextInt(41)+10) / 100);
         }
+        else{
+            meanTailLength = 0;
+        }
 
         //Set Mean Wing Span. 50% chance the species has wings. WingSpan is %100 - %200 of Mean Length
         if(random.nextBoolean()){
             meanWingSpan = meanLength * ((random.nextInt(101)+100) / 100);
         }
+        else{
+            meanWingSpan = 0;
+        }
+
 
         //Set diet.
         switch (random.nextInt(2)){
@@ -60,6 +73,17 @@ public class Species {
 
         //Set Mean Fat percentage. Between %10 and %50
         meanFatPercentage = (random.nextInt(41) + 10) / 100;
+
+        //Set random Species name
+        speciesName = randomString(10);
+
+    }
+
+    String randomString( int len ){
+        StringBuilder sb = new StringBuilder( len );
+        for( int i = 0; i < len; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
     }
 
     public double getMeanWeight() {
@@ -124,5 +148,13 @@ public class Species {
 
     public void setMeanFatPercentage(double meanFatPercentage) {
         this.meanFatPercentage = meanFatPercentage;
+    }
+
+    public String getSpeciesName() {
+        return speciesName;
+    }
+
+    public void setSpeciesName(String speciesName) {
+        this.speciesName = speciesName;
     }
 }
