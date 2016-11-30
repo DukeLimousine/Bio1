@@ -63,16 +63,16 @@ public class Species {
             case 2: diet = Diet.OMNIVORE;
                 break;
 
-        }
+    }
 
         //Set Breeding Capability: Can have between 1 and 3 offspring per generation
         breedingCapability = random.nextInt(3) + 1;
 
         //Set Mean Brain Size. Between 2% and 10% of Length
-        meanBrainSize = meanLength * ((random.nextInt(9)+2) / 100);
+        meanBrainSize = meanLength * (((double)(random.nextInt(9)+2)) / 100);
 
         //Set Mean Fat percentage. Between %10 and %50
-        meanFatPercentage = (random.nextInt(41) + 10) / 100;
+        meanFatPercentage = (((double)(random.nextInt(41) + 10)) / 100);
 
         //Set random Species name
         speciesName = randomString(10);

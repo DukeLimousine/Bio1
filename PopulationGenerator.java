@@ -21,14 +21,14 @@ public class PopulationGenerator {
 
     private double percentDiff(){
 
-        return (random.nextInt(STD_DEV) + 1) / 100;
+        return ((double)random.nextInt(STD_DEV) + 1) / 100;
     }
 
     public ArrayList<SpeciesMember> createRace(int size){
         ArrayList<SpeciesMember> race = new ArrayList<SpeciesMember>();
         Species species = new Species();
 
-        for(int x = 0; x <= size; x++){
+        for(int x = 0; x < size; x++){
 
             SpeciesMember member = new SpeciesMember();
             boolean add;
@@ -86,15 +86,7 @@ public class PopulationGenerator {
             }
 
             //assign random diet
-            int dietVal = random.nextInt(3) + 1;
-            switch (dietVal){
-                case 1: member.setDiet(Species.Diet.HERBIVORE);
-                    break;
-                case 2: member.setDiet(Species.Diet.CARNIVORE);
-                    break;
-                case 3: member.setDiet(Species.Diet.OMNIVORE);
-                    break;
-            }
+            member.setDiet(species.getDiet());
 
             //Assign Breeding Capability
             member.setBreedingCapability(1); //everyone has 1 baby for now
