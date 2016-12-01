@@ -117,4 +117,102 @@ public class PopulationGenerator {
 
         return race;
     }
+
+    public ArrayList<SpeciesMember> reproduce(ArrayList<SpeciesMember> parentGeneration){
+
+        ArrayList<SpeciesMember> offspringGeneration = new ArrayList<SpeciesMember>();
+        boolean add;
+        double traitVal;
+        String spcName = parentGeneration.get(0).getName();
+
+        for(SpeciesMember parent : parentGeneration){
+
+            for(int x = 0; x < parent.getBreedingCapability(); x++){
+                SpeciesMember offspring = new SpeciesMember();
+
+                //calculate and set weight
+                add = random.nextBoolean(); //if true, add the ST_DEV percentage
+                traitVal = parent.getWeight() * percentDiff();//value by which this member's weight differs from the parent weight
+                if(add){
+                    offspring.setWeight(parent.getWeight() + traitVal);
+                }
+                else{
+                    offspring.setWeight(parent.getWeight() - traitVal);
+                }
+
+                //calculate and set length
+                add = random.nextBoolean();
+                traitVal = parent.getLength() * percentDiff();
+                if(add){
+                    offspring.setLength(parent.getLength() + traitVal);
+                }
+                else{
+                    offspring.setLength(parent.getLength() - traitVal);
+                }
+
+                //calculate and set tail length
+                if(parent.getTailLength() > 0){//species has a tail
+                    add = random.nextBoolean();
+                    traitVal = parent.getTailLength() * percentDiff();
+                    if(add){
+                        offspring.setTailLength(parent.getTailLength() + traitVal);
+                    }
+                    else{
+                        offspring.setTailLength(parent.getTailLength() - traitVal);
+                    }
+                }
+                else{//species has no tail
+                    offspring.setTailLength(0);
+                }
+
+                //calculate and set wing span
+                if(parent.getWingSpan()>0){//species has wings
+                    add = random.nextBoolean();
+                    traitVal = parent.getWingSpan() * percentDiff();
+                    if(add){
+                        offspring.setWingSpan(parent.getWingSpan() + traitVal);
+                    }
+                    else{
+                        offspring.setWingSpan(parent.getWingSpan() - traitVal);
+                    }
+                }
+                else{
+                    offspring.setWingSpan(0);//species has no wings
+                }
+
+                //assign random diet
+                offspring.setDiet(parent.getDiet());
+
+                //Assign Breeding Capability
+                offspring.setBreedingCapability(1); //everyone has 1 baby for now
+
+                //calculate and set brain size
+                add = random.nextBoolean();
+                traitVal = parent.getBrainSize() * percentDiff();
+                if(add){
+                    offspring.setBrainSize(parent.getBrainSize() + traitVal);
+                }
+                else{
+                   offspring.setBrainSize(parent.getBrainSize() - traitVal);
+                }
+
+                //calculate and set fat percentage
+                add = random.nextBoolean();
+                traitVal = parent.getFatPercentage() * percentDiff();
+                if(add){
+                    offspring.setFatPercentage(parent.getFatPercentage() + traitVal);
+                }
+                else{
+                    offspring.setFatPercentage(parent.getFatPercentage() - traitVal);
+                }
+
+                offspringGeneration.add(offspring);
+
+            }
+        }
+
+
+        return offspringGeneration;
+
+    }
 }
