@@ -6,7 +6,7 @@ import java.util.Random;
  */
 public class PopulationGenerator {
 
-    final int STD_DEV = 10;
+    final static int STD_DEV = 5;
     //Thresholds for standard deviations set according to the 68-95-99.7 rule (Wikipedia)
     final double FIRST_SD_THRESHOLD = .68;
     final double SECOND_SD_THRESHOLD = .95;
